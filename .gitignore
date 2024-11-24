@@ -40,6 +40,6 @@ yarn-error.log*
 next-env.d.ts
 
 
-# Ignore service account key
-config/forkgpt-50e03e50c972.json
+
+
 
