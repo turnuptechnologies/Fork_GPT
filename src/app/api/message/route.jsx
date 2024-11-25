@@ -25,7 +25,7 @@ export async function POST(req) {
     const result = await model.generateContent(message);
 
     // Debug: Log the full result structure
-    console.log("Result from Generative AI API:", result);
+    console.log("Result from Generative AI API >>>:", result);
 
     // Extract the text from the first candidate in the response
     const aiMessage =
