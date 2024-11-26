@@ -1,5 +1,7 @@
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import { validateToken  , generateToken} from "../../../../utils/decrypted";
 
 // Initialize the Google Generative AI client
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -8,6 +10,16 @@ export async function POST(req) {
   try {
     // Parse the request body
     const { message } = await req.json();
+
+    
+    const token = req.headers.get("authorization")?.split(" ")[1];
+
+    generateToken()
+    
+    const check = await validateToken(token);
+    if (!check) {
+      return NextResponse.json({ error: "Your token has expired" }, { status: 401 });
+    }
 
     // Validate that a message is provided
     if (!message) {
@@ -43,3 +55,4 @@ export async function POST(req) {
     );
   }
 }
+
