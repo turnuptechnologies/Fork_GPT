@@ -1,6 +1,8 @@
 
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+
 
 // Initialize the Google Generative AI client
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -9,6 +11,7 @@ export async function POST(req) {
   try {
     // Parse the request body
     const { message } = await req.json();
+
 
     // Validate that a message is provided
     if (!message) {
@@ -25,7 +28,9 @@ export async function POST(req) {
     const result = await model.generateContent(message);
 
     // Debug: Log the full result structure
-    console.log("Result from Generative AI API >>>:", result);
+
+    console.log("Result from Generative AI API:", result);
+
 
     // Extract the text from the first candidate in the response
     const aiMessage =
@@ -43,6 +48,7 @@ export async function POST(req) {
       { status: 500 }
     );
   }
+
 
 
 
